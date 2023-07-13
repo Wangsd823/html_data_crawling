@@ -1,10 +1,15 @@
 #! python3
 # -*- encoding: utf-8 -*-
+
 import requests
 from common.Config import Url
 from bs4 import BeautifulSoup
 
 _url = Url()
+
+def _break_log(log_val):
+    print('_break_log : ', log_val)
+    return
 
 class ClassificationSpider(object):
 
@@ -13,7 +18,7 @@ class ClassificationSpider(object):
     
     def start(self):
         # 获取HTML
-        doc_html = requests.get(_url.getClassUrl).text
+        doc_html = requests.get(_url.get_class_url, proxies=_url.get_proxies).text
         print('正在爬取全部分类信息...')
         self.parse_html_doc(doc_html)
     
@@ -54,7 +59,7 @@ class SecondFlSpider(object):
                     sub_data = cur_fl_data['sub_list'][sub_ind]
                     if sub_data['href']:
                         print('正在爬取 -> ', cur_fl_data['name'], '_', sub_data['name'], '...')
-                        html_doc = requests.get(_url.singBaseUrl + sub_data['href']).text
+                        html_doc = requests.get(_url.get_single_url(sub_data['href']), proxies= _url.get_proxies).text
                         parse_html_doc_result = self.parse_html_doc(html_doc)
                         result_list.append({
                             'name': sub_data['name'],

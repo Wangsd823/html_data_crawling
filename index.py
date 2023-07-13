@@ -23,6 +23,7 @@ def init():
     print('class result json: ', classSpider.getResult)
     # 总分类数据存储文件
     data_folder = './data'
+    make_dir(data_folder)
     save_file(data_folder, '/fl_data.json', classSpider.getResult)
 
     secondFlSpider = SecondFlSpider(classSpider.getResult)

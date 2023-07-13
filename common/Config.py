@@ -1,24 +1,31 @@
 #! python3
 # -*- encoding: utf-8 -*-
 
+_isOpenProxy = True
+
 class Url():
 
     def __init__(self) -> None:
-        self.classUrl = 'http://zhongyi.alcxw.com/zhongyao/zyc.html'
-        self.singBaseUrl = 'http://zhongyi.alcxw.com'
-        self.singeBaseDetailUrl = ''
-        self.userAgent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36'
+        self._classUrl = 'http://zhongyi.alcxw.com/zhongyao/zyc.html'
+        self._singBaseUrl = 'http://zhongyi.alcxw.com'
+        self._singeBaseDetailUrl = ''
+        self._userAgent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36'
+        self._proxies = {
+            'http': 'http://ws-proxy.jp.sbibits.com:8080'
+        }
 
     @property
-    def getClassUrl(self):
-        return self.classUrl
+    def get_proxies(self):
+        return self._proxies if _isOpenProxy else None
+
+    @property
+    def get_class_url(self):
+        return self._classUrl
     
-    @property
-    def getSingleUrl(self, param):
+    def get_single_url(self, param):
         # TODO parse Url ?
-        return self.singBaseUrl + param
+        return self._singBaseUrl + param
 
-    @property
-    def getSingleUrl(self, param):
+    def get_single_detail_url(self, param):
         # TODO parse Url ?
-        return self.singeBaseDetailUrl + param
+        return self._singeBaseDetailUrl + param
